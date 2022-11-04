@@ -31,6 +31,19 @@ function deleteTask(id) {
   setTasks(remainingTasks);
 }
 
+function editTask(id, newName) {
+  const editedTaskList = tasks.map((task) => {
+  // if this task has the same ID as the edited task
+    if (id === task.id) {
+      //
+      return {...task, name: newName}
+    }
+    return task;
+  });
+  setTasks(editedTaskList);
+}
+
+
 
   const taskList = tasks.map((task)=> <Todo
     id={task.id}
@@ -39,6 +52,7 @@ function deleteTask(id) {
     key={task.id}
     toggleTaskCompleted={toggleTaskCompleted}
     deleteTask={deleteTask}
+    editTask={editTask}
      />);
 
 const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
@@ -50,9 +64,9 @@ const headingText = `${taskList.length} ${tasksNoun} remaining`;
       <h1>To Do</h1> 
       <Form onSubmit={addTask} />
       <div className="filters btn-group stack-exception">
+       {/* <FilterButton />
        <FilterButton />
-       <FilterButton />
-       <FilterButton />
+       <FilterButton /> */}
       </div>
       <h2 id="list-heading">
         {headingText}
